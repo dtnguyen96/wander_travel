@@ -56,14 +56,14 @@ const getForecast = async () => {
 // Render functions
 const renderVenues = (venues) => {
   $venueDivs.forEach(($venue, index) => {
-    const venue= venues[index];
+    const random_index=Math.floor((Math.random()*6)+1);
+    const venue= venues[random_index];
     const venueIcon=venue.categories[0].icon;
     const venueImgSrc=`${venueIcon.prefix}bg_64${venueIcon.suffix}`;
-    console.log(venueImgSrc)
     let venueContent = createVenueHTML(venue.name, venue.location, venueImgSrc);
     $venue.append(venueContent);
   });
-  $destination.append(`<h2>${venues[0].location.city}</h2>`);
+$destination.append(`<h2>${venues[0].location.city}</h2>`);
 }
 
 const renderForecast = (day) => {
