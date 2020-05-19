@@ -70,7 +70,7 @@ const renderVenues = (venues) => {
 const renderForecast = (day) => {
   // Add your code here:
   
-	let weatherContent = '';
+	let weatherContent = createWeatherHTML(day);
   $weatherDiv.append(weatherContent);
 }
 
