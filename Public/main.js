@@ -12,7 +12,7 @@ const $input = $('#city');
 const $submit = $('#button');
 const $destination = $('#destination');
 const $container = $('.container');
-const $venueDivs = [$("#venue1"), $("#venue2"), $("#venue3"), $("#venue4"), $("#venue5"),$("#venue6")];
+const $venueDivs = [$("#venue1"), $("#venue2"), $("#venue3"), $("#venue4")];
 const $weatherDiv = $("#weather1");
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -25,8 +25,8 @@ const getVenues = async () => {
     const response= await fetch (urlToFetch);
     if (response.ok){
       const jsonResponse=await response.json();
+      console.log(jsonResponse)
       const venues=jsonResponse.response.groups[0].items.map(item => item.venue);
-      console.log(venues)
       return venues;
     }
   }
@@ -56,8 +56,7 @@ const getForecast = async () => {
 // Render functions
 const renderVenues = (venues) => {
   $venueDivs.forEach(($venue, index) => {
-    const random_index=Math.floor((Math.random()*6)+1);
-    const venue= venues[random_index];
+    const venue= venues[index];
     const venueIcon=venue.categories[0].icon;
     const venueImgSrc=`${venueIcon.prefix}bg_64${venueIcon.suffix}`;
     let venueContent = createVenueHTML(venue.name, venue.location, venueImgSrc);
@@ -67,7 +66,7 @@ $destination.append(`<h2>${venues[0].location.city}</h2>`);
 }
 
 const renderForecast = (day) => {
-	let weatherContent = createWeatherHTML(day);
+  let weatherContent = createWeatherHTML(day);
   $weatherDiv.append(weatherContent);
 }
 
